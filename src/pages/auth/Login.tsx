@@ -163,7 +163,7 @@ const Login = () => {
             name="password"
             placeholder="Enter your password"
             containerClass={"mb-3"}
-          ></FormInput>
+          />
 
           <div className="text-center d-grid">
             <Button variant="primary" type="submit" disabled={loading}>

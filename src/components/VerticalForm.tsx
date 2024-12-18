@@ -33,10 +33,10 @@ const VerticalForm = <
   // Return JSX
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={formClass} noValidate>
-      {/* {React.Children.map(children, child =>
+      {React.Children.map(children, child =>
         React.isValidElement(child) &&
-          child.props &&
-          child.props.name
+          child.props 
+          // &&child.props.name
          ? React.cloneElement(child, {
              ...child.props,
               // register,
@@ -44,7 +44,7 @@ const VerticalForm = <
               // control,
             })
           : child
-      )} */}
+      )}
     </form>
   );
 };
