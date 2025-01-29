@@ -40,7 +40,7 @@ const VerticalForm = <
          ? React.cloneElement(child, {
              ...child.props,
               // register,
-              // errors,
+              // errors, 
               // control,
             })
           : child
