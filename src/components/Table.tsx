@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, forwardRef, useState } from "react";
+import React, { forwardRef, useState } from "react";
 import {
   useTable,
   useSortBy,
@@ -61,12 +61,7 @@ const IndeterminateCheckbox = forwardRef<
   HTMLInputElement,
   IndeterminateCheckboxProps
 >(({ indeterminate, ...rest }, ref) => {
-  // const defaultRef = useRef();
-  // const resolvedRef: any = ref || defaultRef;
-
-  // useEffect(() => {
-  //   resolvedRef.current.indeterminate = indeterminate;
-  // }, [resolvedRef, indeterminate]);
+  
 
   return (
     <>

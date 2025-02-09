@@ -28,13 +28,32 @@ const Products = () => {
 
   return (
     <React.Fragment>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Ecommerce", path: "/apps/ecommerce/products" },
-          { label: "Products", path: "/apps/ecommerce", active: true },
-        ]}
-        title={"Products"}
-      />
+      <nav aria-label="breadcrumb">
+        <ol className="breadcrumb m-2">
+          <li className="breadcrumb-item">
+            <Link to="/apps/ecommerce/products">
+              Ecommerce
+            </Link>
+          </li>
+          <li
+            className="breadcrumb-item active"
+            aria-current="page">
+            Products
+          </li>
+        </ol>
+      </nav>
+      <div
+        className="mb-3"
+        style={{ backgroundColor: "#5bd2bc", padding: "10px" }}>
+        <div className="d-flex align-items-center justify-content-between">
+          <h3 className="page-title m-0" style={{ color: "#fff" }}>
+            Products
+          </h3>
+          <Link to="#" className="btn btn-danger waves-effect waves-light">
+            <i className="mdi mdi-plus-circle me-1"></i> Add New
+          </Link>
+        </div>
+      </div>
 
       <Row>
         <Col>
@@ -42,11 +61,11 @@ const Products = () => {
             <Card.Body>
               <Row className="justify-content-between">
                 <Col className="col-auto">
-                  <form className="d-flex flex-wrap align-items-center">
+                  <form className="d-flex align-items-center">
                     <label htmlFor="inputPassword2" className="visually-hidden">
                       Search
                     </label>
-                    <div className="me-3">
+                    <div>
                       <input
                         type="search"
                         className="form-control my-1 my-lg-0"
@@ -55,14 +74,17 @@ const Products = () => {
                         onChange={(e: any) => searchProduct(e.target.value)}
                       />
                     </div>
-                    <label htmlFor="status-select" className="me-2">
+                  </form>
+                </Col>
+                <Col className="col-auto">
+                  <div className="d-flex align-items-center">
+                    <label htmlFor="status-select" className="me-2 mb-0">
                       Sort By
                     </label>
-                    <div className="me-sm-3">
+                    <div>
                       <select
                         className="form-select my-1 my-lg-0"
-                        id="status-select"
-                      >
+                        id="status-select">
                         <option defaultValue="all">All</option>
                         <option value="popular">Popular</option>
                         <option value="pricelow">Price Low</option>
@@ -70,21 +92,6 @@ const Products = () => {
                         <option value="soldout">Sold Out</option>
                       </select>
                     </div>
-                  </form>
-                </Col>
-
-                <Col className="col-auto">
-                  <div className="text-lg-end my-1 my-lg-0">
-                    <Button className="btn btn-success waves-effect waves-light me-1">
-                      <i className="mdi mdi-cog"></i>
-                    </Button>
-
-                    <Link
-                      to="#"
-                      className="btn btn-danger waves-effect waves-light"
-                    >
-                      <i className="mdi mdi-plus-circle me-1"></i> Add New
-                    </Link>
                   </div>
                 </Col>
               </Row>
@@ -96,36 +103,33 @@ const Products = () => {
       <Row>
         {(products || []).map((product, index) => {
           return (
-            <Col key={index} md={6} xl={3}>
-              <Card className="product-box">
-                <Card.Body>
+            <Col key={index} md={6} xl={3} className="mb-3">
+              <Card className="product-box h-100">
+                <Card.Body className="d-flex flex-column">
                   <div className="product-action">
                     <Link
                       to="#"
-                      className="btn btn-success btn-xs waves-effect waves-light me-1"
-                    >
+                      className="btn btn-success btn-xs waves-effect waves-light me-1">
                       <i className="mdi mdi-pencil"></i>
                     </Link>
                     <Link
                       to="#"
-                      className="btn btn-danger btn-xs waves-effect waves-light"
-                    >
+                      className="btn btn-danger btn-xs waves-effect waves-light">
                       <i className="mdi mdi-close"></i>
                     </Link>
                   </div>
 
-                  <div className="bg-light">
+                  <div className="bg-light mb-3">
                     <img src={product.image} alt="" className="img-fluid" />
                   </div>
 
-                  <div className="product-info">
+                  <div className="product-info mt-auto">
                     <div className="row align-items-center">
                       <div className="col">
                         <h5 className="font-16 mt-0 sp-line-1">
                           <Link
                             to="/apps/ecommerce/product-details"
-                            className="text-dark"
-                          >
+                            className="text-dark">
                             {product.name}
                           </Link>
                         </h5>
@@ -156,50 +160,6 @@ const Products = () => {
             </Col>
           );
         })}
-      </Row>
-
-      <Row>
-        <Col>
-          <ul className="pagination pagination-rounded justify-content-end mb-3">
-            <li className="page-item">
-              <Link className="page-link" to="#" aria-label="Previous">
-                <span aria-hidden="true">«</span>
-                <span className="visually-hidden">Previous</span>
-              </Link>
-            </li>
-            <li className="page-item active">
-              <Link className="page-link" to="#">
-                1
-              </Link>
-            </li>
-            <li className="page-item">
-              <Link className="page-link" to="#">
-                2
-              </Link>
-            </li>
-            <li className="page-item">
-              <Link className="page-link" to="#">
-                3
-              </Link>
-            </li>
-            <li className="page-item">
-              <Link className="page-link" to="#">
-                4
-              </Link>
-            </li>
-            <li className="page-item">
-              <Link className="page-link" to="#">
-                5
-              </Link>
-            </li>
-            <li className="page-item">
-              <Link className="page-link" to="#" aria-label="Next">
-                <span aria-hidden="true">»</span>
-                <span className="visually-hidden">Next</span>
-              </Link>
-            </li>
-          </ul>
-        </Col>
       </Row>
     </React.Fragment>
   );

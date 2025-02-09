@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { Row, Col, Card, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -78,27 +79,31 @@ const ProductEdit = () => {
   };
 
   return (
-    <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Ecommerce", path: "/apps/ecommerce/details" },
-          {
-            label: "Add / Edit Product",
-            path: "/apps/ecommerce/details",
-            active: true,
-          },
-        ]}
-        title={"Add / Edit Product"}
-      />
+    <React.Fragment>
+      <nav aria-label="breadcrumb">
+        <ol className="breadcrumb m-2">
+          <li className="breadcrumb-item">
+            <Link to="/apps/ecommerce/products">Ecommerce</Link>
+          </li>
+          <li className="breadcrumb-item active" aria-current="page">
+            Add / Edit Product
+          </li>
+        </ol>
+      </nav>
+      <div className="mb-3" style={{ backgroundColor: "#5bd2bc", padding: "10px" }}>
+        <div className="d-flex align-items-center justify-content-between">
+          <h3 className="page-title m-0" style={{ color: "#fff" }}>
+            Add / Edit Product
+          </h3>
+        </div>
+      </div>
 
       <form onSubmit={handleSubmit(() => {})}>
         <Row>
           <Col lg={6}>
             <Card>
               <Card.Body>
-                <h5 className="text-uppercase bg-light p-2 mt-0 mb-3">
-                  General
-                </h5>
+                <h5 className="text-uppercase mt-0 mb-3">General</h5>
                 <FormInput
                   name="name"
                   label="Product Name"
@@ -217,18 +222,14 @@ const ProductEdit = () => {
           <Col lg={6}>
             <Card>
               <Card.Body>
-                <h5 className="text-uppercase mt-0 mb-3 bg-light p-2">
-                  Product Images
-                </h5>
+                <h5 className="text-uppercase mt-0 mb-3">Product Images</h5>
                 <FileUploader />
               </Card.Body>
             </Card>
 
             <Card>
               <Card.Body>
-                <h5 className="text-uppercase mt-0 mb-3 bg-light p-2">
-                  Meta Data
-                </h5>
+                <h5 className="text-uppercase mt-0 mb-3">Meta Data</h5>
                 <FormInput
                   name="metatitle"
                   label="Meta title"
@@ -268,30 +269,25 @@ const ProductEdit = () => {
 
         <Row>
           <Col>
-            <div className="text-center mb-3">
-              <button
-                type="button"
-                className="btn w-sm btn-light waves-effect me-1"
-              >
-                Cancel
-              </button>
-              <button
-                type="submit"
-                className="btn w-sm btn-success waves-effect waves-light me-1"
-              >
-                Save
-              </button>
-              <button
-                type="button"
-                className="btn w-sm btn-danger waves-effect waves-light me-1"
-              >
-                Delete
-              </button>
-            </div>
+            <Card>
+              <Card.Body>
+                <div className="text-center">
+                  <button type="button" className="btn btn-light waves-effect me-2">
+                    Cancel
+                  </button>
+                  <button type="submit" className="btn btn-success waves-effect waves-light me-2">
+                    Save
+                  </button>
+                  <button type="button" className="btn btn-danger waves-effect waves-light">
+                    Delete
+                  </button>
+                </div>
+              </Card.Body>
+            </Card>
           </Col>
         </Row>
       </form>
-    </>
+    </React.Fragment>
   );
 };
 

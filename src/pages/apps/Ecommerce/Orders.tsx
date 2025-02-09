@@ -4,7 +4,6 @@ import { Row, Col, Card, Button } from "react-bootstrap";
 import classNames from "classnames";
 
 // components
-import PageTitle from "../../../components/PageTitle";
 import Table from "../../../components/Table";
 
 // dummy data
@@ -182,6 +181,7 @@ const sizePerPageList = [
 // main component
 const Orders = () => {
   const [orderList, setOrderList] = useState<OrdersItemTypes[]>(orders);
+  const [searchTerm, setSearchTerm] = useState('');
 
   // change order status group
   const changeOrderStatusGroup = (OrderStatusGroup: string) => {
@@ -196,62 +196,93 @@ const Orders = () => {
     setOrderList(updatedData);
   };
 
+  // Add search handler
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+    
+    const filtered = value === "" 
+      ? orders 
+      : orders.filter(order => 
+          order.order_id.toString().toLowerCase().includes(value.toLowerCase())
+        );
+    setOrderList(filtered);
+  };
+
   return (
-    <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Ecommerce", path: "/apps/ecommerce/orders" },
-          { label: "Orders", path: "/apps/ecommerce/orders", active: true },
-        ]}
-        title={"Orders"}
-      />
+    <React.Fragment>
+      <nav aria-label="breadcrumb">
+        <ol className="breadcrumb m-2">
+          <li className="breadcrumb-item">
+            <Link to="/apps/ecommerce/orders">Ecommerce</Link>
+          </li>
+          <li className="breadcrumb-item active" aria-current="page">
+            Orders
+          </li>
+        </ol>
+      </nav>
+      <div className="mb-3" style={{ backgroundColor: "#5bd2bc", padding: "10px" }}>
+        <div className="d-flex align-items-center justify-content-between">
+          <h3 className="page-title m-0" style={{ color: "#fff" }}>
+            Orders
+          </h3>
+          <Button className="btn btn-danger waves-effect waves-light">
+            <i className="mdi mdi-plus-circle me-1"></i> Add New Order
+          </Button>
+        </div>
+      </div>
 
       <Row>
         <Col>
           <Card>
             <Card.Body>
-              <Row className="align-items-center">
-                <Col lg={8}>
-                  <form className="row gy-2 gx-2 align-items-center justify-content-lg-start justify-content-between">
-                    <div className="col-auto">
-                      <div className="d-flex align-items-center w-auto">
-                        <label htmlFor="status-select" className="me-2">
-                          Status
-                        </label>
-                        <select
-                          className="form-select"
-                          id="status-select"
-                          onChange={(e: any) =>
-                            changeOrderStatusGroup(e.target.value)
-                          }
-                        >
-                          <option value="All">All</option>
-                          <option value="Paid">Paid</option>
-                          <option value="Authorization">
-                            Awaiting Authorization
-                          </option>
-                          <option value="Failed">Payment failed</option>
-                          <option value="Unpaid">Unpaid</option>
-                        </select>
-                      </div>
-                    </div>
-                  </form>
-                </Col>
-
-                <Col lg={4}>
-                  <div className="text-lg-end mt-xl-0 mt-2">
-                    <Button className="btn btn-danger mb-2 me-2">
-                      <i className="mdi mdi-basket me-1"></i> Add New Order
-                    </Button>
-                    <Button className="btn btn-light mb-2">Export</Button>
+              <Row className="justify-content-between">
+                <Col md={4}>
+                  <div className="d-flex align-items-center w-auto">
+                    <label htmlFor="status-select" className="me-2">
+                      Status
+                    </label>
+                    <select
+                      className="form-select"
+                      id="status-select"
+                      onChange={(e: any) => changeOrderStatusGroup(e.target.value)}
+                    >
+                      <option value="All">All</option>
+                      <option value="Paid">Paid</option>
+                      <option value="Authorization">Awaiting Authorization</option>
+                      <option value="Failed">Payment failed</option>
+                      <option value="Unpaid">Unpaid</option>
+                    </select>
                   </div>
                 </Col>
+                <Col md={4}>
+                  <div className="d-flex align-items-center">
+                    <input
+                      type="search"
+                      className="form-control"
+                      placeholder="Search..."
+                      value={searchTerm}
+                      onChange={handleSearch}
+                    />
+                  </div>
+                </Col>
+                <Col md={4} className="text-end">
+                  <Button className="btn btn-light">Export</Button>
+                </Col>
               </Row>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
 
+      <Row>
+        <Col>
+          <Card>
+            <Card.Body>
               <Table
                 columns={columns}
                 data={orderList}
-                isSearchable={true}
+                isSearchable={false}
                 pageSize={10}
                 sizePerPageList={sizePerPageList}
                 isSortable={true}
@@ -264,7 +295,7 @@ const Orders = () => {
           </Card>
         </Col>
       </Row>
-    </>
+    </React.Fragment>
   );
 };
 

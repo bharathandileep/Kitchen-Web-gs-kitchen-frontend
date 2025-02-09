@@ -45,6 +45,7 @@ export interface RoutesProps {
   children?: RoutesProps[];
 }
 
+
 // ecommerce routes
 const ecommerceAppRoutes = {
   path: "/apps/ecommerce",
@@ -52,7 +53,13 @@ const ecommerceAppRoutes = {
   route: PrivateRoute,
   roles: ["Admin"],
   icon: "shopping-cart",
-  children: [
+  children: [    
+    {
+      path: "/",
+      name: "Products",
+      element: <EcommerceProducts />,
+      route: PrivateRoute,
+    },
     {
       path: "/apps/ecommerce/products",
       name: "Products",

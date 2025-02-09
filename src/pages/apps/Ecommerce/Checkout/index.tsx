@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { Row, Col, Card, Tab, Nav } from "react-bootstrap";
 import classnames from "classnames";
+import { Link } from "react-router-dom";
 
 // components
-import PageTitle from "../../../../components/PageTitle";
-
 import Billing from "./Billing";
 import Shipping from "./Shipping";
 import Payment from "./Payment";
@@ -81,14 +80,36 @@ const Checkout = () => {
   };
 
   return (
-    <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Ecommerce", path: "/apps/ecommerce/checkout" },
-          { label: "Checkout", path: "/apps/ecommerce/checkout", active: true },
-        ]}
-        title={"Checkout"}
-      />
+    <React.Fragment>
+      <nav aria-label="breadcrumb">
+        <ol className="breadcrumb m-2">
+          <li className="breadcrumb-item">
+            <Link to="/apps/ecommerce/checkout">
+              Ecommerce
+            </Link>
+          </li>
+          <li
+            className="breadcrumb-item active"
+            aria-current="page"
+          >
+            Checkout
+          </li>
+        </ol>
+      </nav>
+      <div
+        className="mb-3"
+        style={{ backgroundColor: "#5bd2bc", padding: "10px" }}
+      >
+        <div className="d-flex align-items-center justify-content-between">
+          <h3 className="page-title m-0" style={{ color: "#fff" }}>
+            Checkout
+          </h3>
+          <Link to="/apps/ecommerce/cart" className="btn btn-danger waves-effect waves-light">
+            <i className="mdi mdi-cart me-1"></i> Back to Cart
+          </Link>
+        </div>
+      </div>
+
       <Tab.Container defaultActiveKey="1">
         <Row>
           <Col>
@@ -164,7 +185,7 @@ const Checkout = () => {
           </Col>
         </Row>
       </Tab.Container>
-    </>
+    </React.Fragment>
   );
 };
 

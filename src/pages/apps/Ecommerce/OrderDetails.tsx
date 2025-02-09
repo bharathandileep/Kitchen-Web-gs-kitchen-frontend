@@ -282,17 +282,34 @@ const OrderDetails = () => {
 
   return (
     <React.Fragment>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Ecommerce", path: "/apps/ecommerce/order/details" },
-          {
-            label: "Order Detail",
-            path: "/apps/ecommerce/order/details",
-            active: true,
-          },
-        ]}
-        title={"Order Detail"}
-      />
+      <nav aria-label="breadcrumb">
+        <ol className="breadcrumb m-2">
+          <li className="breadcrumb-item">
+            <Link to="/apps/ecommerce/order/details">
+              Ecommerce
+            </Link>
+          </li>
+          <li
+            className="breadcrumb-item active"
+            aria-current="page"
+          >
+            Order Details
+          </li>
+        </ol>
+      </nav>
+      <div
+        className="mb-3"
+        style={{ backgroundColor: "#5bd2bc", padding: "10px" }}
+      >
+        <div className="d-flex align-items-center justify-content-between">
+          <h3 className="page-title m-0" style={{ color: "#fff" }}>
+            Order Details
+          </h3>
+          <Link to="#" className="btn btn-danger waves-effect waves-light">
+            <i className="mdi mdi-plus-circle me-1"></i> Print Order
+          </Link>
+        </div>
+      </div>
 
       <Row>
         <Col lg={4}>

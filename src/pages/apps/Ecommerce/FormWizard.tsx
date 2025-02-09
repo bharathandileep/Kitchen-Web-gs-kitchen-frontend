@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Card, Row, Col, Button, ProgressBar } from 'react-bootstrap';
+import { Card, Row, Col, Button } from 'react-bootstrap';
+import { CheckCircle } from 'react-feather';
 import './FormWizard.scss'; // Create this file for custom styles
 
 interface FormData {
@@ -171,30 +172,35 @@ const FormWizard = () => {
     { number: 3, title: 'Address' }
   ];
 
-  // Calculate progress percentage
-  const progress = ((currentStep - 1) / 2) * 100;
+  const renderStepper = () => (
+    <div className="stepper-wrapper">
+      {steps.map((step) => (
+        <div
+          key={step.number}
+          className={`stepper-item ${
+            currentStep > step.number
+              ? 'completed'
+              : currentStep === step.number
+              ? 'active'
+              : ''
+          }`}
+        >
+          <div className="step-counter">
+            <span className="step-number">{step.number}</span>
+            <CheckCircle size={20} className="check-icon" />
+          </div>
+          <div className="step-name">{step.title}</div>
+        </div>
+      ))}
+    </div>
+  );
 
   return (
     <Card>
       <Card.Body>
         <div className="form-wizard">
-          <div className="wizard-progress mb-4">
-            <ProgressBar now={progress} className="progress-sm" />
-            <div className="wizard-progress-labels">
-              <div className={`step-label ${currentStep >= 1 ? 'active' : ''}`}>
-                Personal Info
-              </div>
-              <div className={`step-label ${currentStep >= 2 ? 'active' : ''}`}>
-                Contact
-              </div>
-              <div className={`step-label ${currentStep >= 3 ? 'active' : ''}`}>
-                Address
-              </div>
-            </div>
-          </div>
-
+          {renderStepper()}
           {renderStep()}
-
           <div className="text-center mt-4">
             {currentStep > 1 && (
               <Button variant="secondary" className="me-2" onClick={handlePrevious}>

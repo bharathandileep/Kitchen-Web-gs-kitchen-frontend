@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { Row, Col, Card, ProgressBar, Tab, Nav } from "react-bootstrap";
 
 // components
-import PageTitle from "../../../components/PageTitle";
 import Rating from "../../../components/Rating";
 
 import productImg1 from "../../../assets/images/products/product-9.jpg";
@@ -146,18 +145,27 @@ const ProductDetails = () => {
   );
 
   return (
-    <>
-      <PageTitle
-        breadCrumbItems={[
-          { label: "Ecommerce", path: "/apps/ecommerce/details" },
-          {
-            label: "Product Detail",
-            path: "/apps/ecommerce/details",
-            active: true,
-          },
-        ]}
-        title={"Product Detail"}
-      />
+    <React.Fragment>
+      <nav aria-label="breadcrumb">
+        <ol className="breadcrumb m-2">
+          <li className="breadcrumb-item">
+            <Link to="/apps/ecommerce/products">Ecommerce</Link>
+          </li>
+          <li className="breadcrumb-item active" aria-current="page">
+            Product Details
+          </li>
+        </ol>
+      </nav>
+      <div className="mb-3" style={{ backgroundColor: "#5bd2bc", padding: "10px" }}>
+        <div className="d-flex align-items-center justify-content-between">
+          <h3 className="page-title m-0" style={{ color: "#fff" }}>
+            Product Details
+          </h3>
+          <Link to="#" className="btn btn-danger waves-effect waves-light">
+            <i className="mdi mdi-plus-circle me-1"></i> Add New
+          </Link>
+        </div>
+      </div>
 
       <Row>
         <Col>
@@ -360,7 +368,7 @@ const ProductDetails = () => {
           </Card>
         </Col>
       </Row>
-    </>
+    </React.Fragment>
   );
 };
 
