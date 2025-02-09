@@ -1,374 +1,369 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Row, Col, Card, ProgressBar, Tab, Nav } from "react-bootstrap";
+import { Row, Col, Card, Button, Badge } from "react-bootstrap";
 
-// components
-import Rating from "../../../components/Rating";
+// Sample product images (replace with actual images)
+import productImg1 from "../../../assets/images/products/product-1.png";
+// import productImg2 from "../../../assets/images/products/product-2.png";
+// import productImg3 from "../../../assets/images/products/product-3.png";
+// import productImg4 from "../../../assets/images/products/product-4.png";
 
-import productImg1 from "../../../assets/images/products/product-9.jpg";
-import productImg2 from "../../../assets/images/products/product-10.jpg";
-import productImg3 from "../../../assets/images/products/product-11.jpg";
-import productImg4 from "../../../assets/images/products/product-12.jpg";
+// Add this import for profile image
+import defaultProfile from "../../../assets/images/products/product-10.jpg";
+
+// Add these imports for card images
+import dashboardUI from "../../../assets/images/macbook.png";
+import cakeImage from "../../../assets/images/products/product-5.png";
+
+// Add this verification button component
+const VerificationButton = () => (
+  <Button
+    variant="danger"
+    className="d-flex align-items-center gap-2 px-3 py-2">
+    <i className="mdi mdi-close-circle-outline"></i>
+    Not Verified
+  </Button>
+);
 
 interface Product {
+  name: string;
   brand: string;
-  name?: string;
-  reviews: string;
-  status: string;
-  discount: number;
-  price: number;
   description: string;
+  price: number;
+  discount: number;
   rating: number;
+  status: string;
   features: string[];
 }
 
-// Stock Table
-const Stocks = () => {
-  return (
-    <>
-      <div className="table-responsive mt-4">
-        <table className="table table-bordered table-centered mb-0">
-          <thead className="table-light">
-            <tr>
-              <th>Outlets</th>
-              <th>Price</th>
-              <th>Stock</th>
-              <th>Revenue</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>ASOS Ridley Outlet - NYC</td>
-              <td>$139.58</td>
-              <td>
-                <div className="row align-items-center g-0">
-                  <div className="col-auto">
-                    <span className="me-2">27%</span>
-                  </div>
-                  <div className="col">
-                    <ProgressBar
-                      now={27}
-                      className="progress-sm"
-                      variant="danger"
-                    />
-                  </div>
-                </div>
-              </td>
-              <td>$1,89,547</td>
-            </tr>
-            <tr>
-              <td>Marco Outlet - SRT</td>
-              <td>$149.99</td>
-              <td>
-                <div className="row align-items-center g-0">
-                  <div className="col-auto">
-                    <span className="me-2">71%</span>
-                  </div>
-                  <div className="col">
-                    <ProgressBar
-                      now={71}
-                      className="progress-sm"
-                      variant="success"
-                    />
-                  </div>
-                </div>
-              </td>
-              <td>$87,245</td>
-            </tr>
-            <tr>
-              <td>Chairtest Outlet - HY</td>
-              <td>$135.87</td>
-              <td>
-                <div className="row align-items-center g-0">
-                  <div className="col-auto">
-                    <span className="me-2">82%</span>
-                  </div>
-                  <div className="col">
-                    <ProgressBar
-                      now={82}
-                      className="progress-sm"
-                      variant="success"
-                    />
-                  </div>
-                </div>
-              </td>
-              <td>$5,87,478</td>
-            </tr>
-            <tr>
-              <td>Nworld Group - India</td>
-              <td>$159.89</td>
-              <td>
-                <div className="row align-items-center g-0">
-                  <div className="col-auto">
-                    <span className="me-2">42%</span>
-                  </div>
-                  <div className="col">
-                    <ProgressBar
-                      now={42}
-                      className="progress-sm"
-                      variant="warning"
-                    />
-                  </div>
-                </div>
-              </td>
-              <td>$55,781</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </>
-  );
-};
-
-const ProductDetails = () => {
+const ProductDetails: React.FC = () => {
   const [product] = useState<Product>({
-    brand: "Jack & Jones",
-    name: "Jack & Jones Men's T-shirt (Blue)",
-    reviews: "36",
-    status: "Instock",
-    discount: 20,
-    price: 80,
+    name: "Smart Wireless Headphones",
+    brand: "SoundTech",
     description:
-      "The languages only differ in their grammar, their pronunciation and their most common words. Everyone realizes why a new common language would be desirable: one could refuse to pay expensive translators.",
-    rating: 4.5,
+      "Experience high-quality sound with active noise cancellation and long battery life.",
+    price: 250,
+    discount: 15,
+    rating: 4.7,
+    status: "In Stock",
     features: [
-      "Sed ut perspiciatis unde",
-      "Itaque earum rerum hic",
-      "Nemo enim ipsam voluptatem",
-      "Donec quam felis ultricies nec",
-      "Temporibus autem quibusdam et",
+      "Bluetooth 5.0 Connectivity",
+      "Active Noise Cancellation",
+      "20 Hours Battery Life",
+      "Comfortable Over-Ear Fit",
+      "Fast Charging Support",
     ],
   });
 
-  const [discountPrice] = useState<number>(
-    Math.round(product.price - (product.price * product.discount) / 100)
-  );
+  const discountedPrice =
+    product.price - (product.price * product.discount) / 100;
 
   return (
-    <React.Fragment>
-      <nav aria-label="breadcrumb">
-        <ol className="breadcrumb m-2">
+    <div className="container-fluid px-4 py-3">
+      {/* Breadcrumb */}
+      <nav aria-label="breadcrumb" className="mb-3">
+        <ol className="breadcrumb m-0">
           <li className="breadcrumb-item">
-            <Link to="/apps/ecommerce/products">Ecommerce</Link>
+            <Link to="/products">Products</Link>
           </li>
           <li className="breadcrumb-item active" aria-current="page">
-            Product Details
+            {product.name}
           </li>
         </ol>
       </nav>
-      <div className="mb-3" style={{ backgroundColor: "#5bd2bc", padding: "10px" }}>
-        <div className="d-flex align-items-center justify-content-between">
-          <h3 className="page-title m-0" style={{ color: "#fff" }}>
-            Product Details
-          </h3>
-          <Link to="#" className="btn btn-danger waves-effect waves-light">
-            <i className="mdi mdi-plus-circle me-1"></i> Add New
-          </Link>
-        </div>
+
+      {/* Profile Section */}
+      <div
+        className="mb-4 position-relative overflow-hidden"
+        style={{
+          backgroundColor: "#5bd2bc",
+          padding: "30px",
+          borderRadius: "16px",
+          boxShadow: "0 4px 24px rgba(91, 210, 188, 0.2)",
+        }}>
+        <Row className="align-items-start">
+          {/* Column 1: Profile Image */}
+          <Col xs={12} md={3} className="text-center text-md-start">
+            <div className="position-relative d-inline-block">
+              <img
+                src={defaultProfile}
+                alt="Business Profile"
+                className="rounded-circle"
+                style={{
+                  width: "200px",
+                  height: "200px",
+                  objectFit: "cover",
+                  border: "4px solid rgba(255, 255, 255, 0.2)",
+                  boxShadow: "0 4px 14px rgba(0, 0, 0, 0.1)"
+                }}
+              />
+              <div 
+                className="position-absolute bg-success rounded-circle"
+                style={{
+                  border: "2px solid white",
+                  width: "24px",
+                  height: "24px",
+                  bottom: "-10px",
+                  right: "90px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center"
+                }}>
+                <i className="mdi mdi-check text-white" style={{ fontSize: '14px' }}></i>
+              </div>
+            </div>
+          </Col>
+
+          {/* Column 2: Profile Details */}
+          <Col xs={12} md={6} className="text-center text-md-start mt-4 mt-md-0">
+            <div className="d-flex flex-column h-100">
+              {/* Business Name */}
+              <h2 
+                className="text-white mb-3"
+                style={{ 
+                  fontSize: '2rem',
+                  fontWeight: '600',
+                  lineHeight: '1.2'
+                }}>
+                Dine Eas
+              </h2>
+
+              {/* Contact Information */}
+              <div className="mb-3" style={{display: 'flex', flexDirection: 'column'}}>
+                {[
+                  { icon: "account", text: "Dine Eas" },
+                  { icon: "email", text: "DinesEas@gmail.com" },
+                  { icon: "phone", text: "1234567891" }
+                ].map((item, index) => (
+                  <div 
+                    key={index} 
+                    className="d-flex align-items-center gap-2 mb-2"
+                    style={{ color: 'rgba(255, 255, 255, 0.9)' }}>
+                    <i className={`mdi mdi-${item.icon}`} style={{ fontSize: '18px' }}></i>
+                    <span style={{ fontSize: '0.95rem' }}>{item.text}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Badges */}
+              <div className="d-flex gap-2">
+                {["Active", "Organic", "Veg"].map((badge, index) => (
+                  <Badge
+                    key={index}
+                    className="rounded-pill px-2 py-1"
+                    style={{
+                      backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                      fontSize: '0.75rem',
+                      fontWeight: '500'
+                    }}>
+                    <i className={`mdi mdi-${
+                      badge === 'Active' ? 'check-circle' : 
+                      badge === 'Organic' ? 'leaf' : 
+                      'food-apple'
+                    } text-success me-1`}></i>
+                    {badge}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+          </Col>
+
+          {/* Column 3: Action Buttons */}
+          <Col xs={12} md={3} className="d-flex justify-content-md-end mt-4 mt-md-0">
+            <div className="d-flex gap-2">
+              <Button
+                variant="light"
+                className="d-flex align-items-center gap-1 px-3 py-1"
+                style={{
+                  backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                  border: 'none',
+                  fontSize: '0.9rem',
+                  height: '35px'
+                }}>
+                <i className="mdi mdi-pencil"></i>
+                Edit
+              </Button>
+              <Button
+                variant="danger"
+                className="d-flex align-items-center gap-1 px-3 py-1"
+                style={{
+                  backgroundColor: 'rgba(220, 53, 69, 0.9)',
+                  border: 'none',
+                  fontSize: '0.9rem',
+                  height: '35px'
+                }}>
+                <i className="mdi mdi-delete"></i>
+                Delete
+              </Button>
+            </div>
+          </Col>
+        </Row>
       </div>
 
-      <Row>
-        <Col>
-          <Card>
+      {/* Information Cards */}
+      <Row className="mb-4 g-3">
+        <Col md={6}>
+          <Card className="h-100 shadow-sm">
             <Card.Body>
-              <Row>
-                <Col lg={5}>
-                  <Tab.Container
-                    id="left-tabs-example"
-                    defaultActiveKey="product-1-item"
-                  >
-                    <Tab.Content className="p-0">
-                      <Tab.Pane eventKey="product-1-item">
-                        <img
-                          src={productImg1}
-                          alt=""
-                          className="img-fluid mx-auto d-block rounded"
-                        />
-                      </Tab.Pane>
-                      <Tab.Pane eventKey="product-2-item">
-                        <img
-                          src={productImg2}
-                          alt=""
-                          className="img-fluid mx-auto d-block rounded"
-                        />
-                      </Tab.Pane>
-                      <Tab.Pane eventKey="product-3-item">
-                        <img
-                          src={productImg3}
-                          alt=""
-                          className="img-fluid mx-auto d-block rounded"
-                        />
-                      </Tab.Pane>
-                      <Tab.Pane eventKey="product-4-item">
-                        <img
-                          src={productImg4}
-                          alt=""
-                          className="img-fluid mx-auto d-block rounded"
-                        />
-                      </Tab.Pane>
-                    </Tab.Content>
+              <div className="d-flex justify-content-between align-items-start mb-3">
+                <h5 className="card-title">FSSAI License</h5>
+                <VerificationButton />
+              </div>
+              <div className="mb-3">
+                <p className="mb-2">
+                  <strong>Certificate Number:</strong> 12345012345679
+                </p>
+                <p className="mb-2">
+                  <strong>Expiry Date:</strong> 2/13/2025
+                </p>
+              </div>
+              <img
+                src={dashboardUI}
+                alt="FSSAI Dashboard"
+                className="img-fluid rounded"
+                style={{
+                  maxHeight: "150px",
+                  objectFit: "cover",
+                  width: "100%",
+                }}
+              />
+            </Card.Body>
+          </Card>
+        </Col>
 
-                    <Nav variant="pills" as="ul" className="nav nav-justified">
-                      <Nav.Item as="li">
-                        <Nav.Link
-                          eventKey="product-1-item"
-                          className="product-thumb cursor-pointer"
-                        >
-                          <img
-                            src={productImg1}
-                            alt=""
-                            className="img-fluid mx-auto d-block rounded"
-                          />
-                        </Nav.Link>
-                      </Nav.Item>
-                      <Nav.Item as="li">
-                        <Nav.Link
-                          eventKey="product-2-item"
-                          className="product-thumb cursor-pointer"
-                        >
-                          <img
-                            src={productImg2}
-                            alt=""
-                            className="img-fluid mx-auto d-block rounded"
-                          />
-                        </Nav.Link>
-                      </Nav.Item>
-                      <Nav.Item as="li">
-                        <Nav.Link
-                          eventKey="product-3-item"
-                          className="product-thumb cursor-pointer"
-                        >
-                          <img
-                            src={productImg3}
-                            alt=""
-                            className="img-fluid mx-auto d-block rounded"
-                          />
-                        </Nav.Link>
-                      </Nav.Item>
-                      <Nav.Item as="li">
-                        <Nav.Link
-                          eventKey="product-4-item"
-                          className="product-thumb cursor-pointer"
-                        >
-                          <img
-                            src={productImg4}
-                            alt=""
-                            className="img-fluid mx-auto d-block rounded"
-                          />
-                        </Nav.Link>
-                      </Nav.Item>
-                    </Nav>
-                  </Tab.Container>
-                </Col>
+        <Col md={6}>
+          <Card className="h-100 shadow-sm">
+            <Card.Body>
+              <div className="d-flex justify-content-between align-items-start mb-3">
+                <h5 className="card-title">PAN Details</h5>
+                <VerificationButton />
+              </div>
+              <div className="mb-3">
+                <p className="mb-2">
+                  <strong>PAN Number:</strong> BAJPC4350M
+                </p>
+                <p className="mb-2">
+                  <strong>Card Holder:</strong> Owner
+                </p>
+              </div>
+              <img
+                src={cakeImage}
+                alt="Cake"
+                className="img-fluid rounded"
+                style={{ maxHeight: "150px", objectFit: "cover" }}
+              />
+            </Card.Body>
+          </Card>
+        </Col>
 
-                <Col lg={7}>
-                  <div className="ps-xl-3 mt-3 mt-xl-0">
-                    <Link to="#" className="text-primary">
-                      {product.brand}
-                    </Link>
-                    <h4 className="mb-3"> {product.name}</h4>
-                    <Rating value={product.rating} />
-                    <p className="mb-4">
-                      <Link to="#" className="text-muted">
-                        ( {product.reviews} Customer Reviews )
-                      </Link>
-                    </p>
-                    <h6 className="text-danger text-uppercase">
-                      {product.discount}% Off
-                    </h6>
-                    <h4 className="mb-4">
-                      Price :{" "}
-                      <span className="text-muted me-2">
-                        <del>${product.price} USD</del>
-                      </span>{" "}
-                      <b>${discountPrice} USD</b>
-                    </h4>
-
-                    <h4>
-                      <span className="badge bg-soft-success text-success mb-4">
-                        {product.status}
-                      </span>
-                    </h4>
-
-                    <p className="text-muted mb-4">{product.description}</p>
-
-                    <Row className="mb-3">
-                      {(product.features || []).map((item, index) => {
-                        return (
-                          <React.Fragment key={index}>
-                            {index % 2 === 0 ? (
-                              <Col md={6}>
-                                <p className="text-muted">
-                                  <i className="mdi mdi-checkbox-marked-circle-outline h6 text-primary me-2"></i>
-                                  {index % 2 === 0 && item}
-                                </p>
-                              </Col>
-                            ) : (
-                              <Col md={6}>
-                                <p className="text-muted">
-                                  <i className="mdi mdi-checkbox-marked-circle-outline h6 text-primary me-2"></i>
-                                  {index % 2 !== 0 && item}
-                                </p>
-                              </Col>
-                            )}
-                          </React.Fragment>
-                        );
-                      })}
-                    </Row>
-
-                    <form className="d-flex flex-wrap align-items-center mb-4">
-                      <label className="my-1 me-2" htmlFor="quantityinput">
-                        Quantity
-                      </label>
-                      <div className="me-3">
-                        <select className="form-select my-1" id="quantityinput">
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                          <option value="5">5</option>
-                          <option value="6">6</option>
-                          <option value="7">7</option>
-                        </select>
-                      </div>
-
-                      <label className="my-1 me-2" htmlFor="sizeinput">
-                        Size
-                      </label>
-                      <div className="me-sm-3">
-                        <select className="form-select my-1" id="sizeinput">
-                          <option defaultValue="0">Small</option>
-                          <option value="1">Medium</option>
-                          <option value="2">Large</option>
-                          <option value="3">X-large</option>
-                        </select>
-                      </div>
-                    </form>
-
-                    <div>
-                      <button type="button" className="btn btn-danger me-2">
-                        <i className="mdi mdi-heart-outline"></i>
-                      </button>
-                      <button
-                        type="button"
-                        className="btn btn-success waves-effect waves-light"
-                      >
-                        <span className="btn-label">
-                          <i className="mdi mdi-cart"></i>
-                        </span>
-                        Add to cart
-                      </button>
-                    </div>
-                  </div>
-                </Col>
-              </Row>
-
-              <Stocks />
+        <Col md={6}>
+          <Card className="h-100 shadow-sm">
+            <Card.Body>
+              <div className="d-flex justify-content-between align-items-start mb-3">
+                <h5 className="card-title">GST Registration</h5>
+                <VerificationButton />
+              </div>
+              <div className="mb-3">
+                <p className="mb-2">
+                  <strong>GST Number:</strong> 22AAAAA0000A1Z6
+                </p>
+                <p className="mb-2">
+                  <strong>Expiry Date:</strong> 2/13/2025
+                </p>
+              </div>
+              <img
+                src={dashboardUI}
+                alt="GST Dashboard"
+                className="img-fluid rounded"
+                style={{
+                  maxHeight: "150px",
+                  objectFit: "cover",
+                  width: "100%",
+                }}
+              />
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col md={6}>
+          <Card className="h-100 shadow-sm">
+            <Card.Body>
+              <h5 className="card-title mb-3">Location Details</h5>
+              <p className="card-text mb-4">
+                Trikkakara Near BHM, Cochin, Ernakulam East, Keralam, 123453,
+                Indian
+              </p>
+              <div
+                className="map-container"
+                style={{ height: "200px", width: "100%" }}>
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3928.769314809927!2d76.32868731479452!3d10.031941892830645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b080c31865e74c1%3A0x4742c12c4f2a903f!2sCochin%20University%20of%20Science%20and%20Technology!5e0!3m2!1sen!2sin!4v1645446314016!5m2!1sen!2sin"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0, borderRadius: "8px" }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"></iframe>
+              </div>
             </Card.Body>
           </Card>
         </Col>
       </Row>
-    </React.Fragment>
+
+      {/* Product Details Card
+      <Card className="shadow-sm">
+        <Card.Body className="p-4">
+          <Row className="g-4">
+            <Col
+              md={6}
+              className="d-flex align-items-center justify-content-center">
+              <img
+                src={productImg1}
+                alt={product.name}
+                className="img-fluid rounded"
+                style={{ maxHeight: "400px", objectFit: "contain" }}
+              />
+            </Col>
+
+            <Col md={6}>
+              <div className="ps-md-4">
+                <h2 className="mb-3">{product.name}</h2>
+                <h5 className="text-muted mb-3">by {product.brand}</h5>
+                <Badge bg="success" className="mb-4 px-3 py-2">
+                  {product.status}
+                </Badge>
+                <h3 className="mb-4">
+                  <del className="text-muted me-3">
+                    ${product.price.toFixed(2)}
+                  </del>
+                  <span className="text-danger">
+                    ${discountedPrice.toFixed(2)}
+                  </span>
+                </h3>
+
+                <p className="mb-4">{product.description}</p>
+
+                <ul className="list-unstyled mb-4">
+                  {product.features.map((feature, index) => (
+                    <li key={index} className="mb-2 d-flex align-items-center">
+                      <span className="me-2">✅</span> {feature}
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="d-flex gap-3">
+                  <Button variant="primary" size="lg" className="px-4">
+                    Add to Cart
+                  </Button>
+                  <Button variant="outline-danger" size="lg" className="px-4">
+                    ❤️ Wishlist
+                  </Button>
+                </div>
+              </div>
+            </Col>
+          </Row>
+        </Card.Body>
+      </Card> */}
+    </div>
   );
 };
 
