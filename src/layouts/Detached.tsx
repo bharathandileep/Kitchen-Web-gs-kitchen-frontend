@@ -15,8 +15,6 @@ import { LayoutTypes, SideBarTypes } from "../constants";
 import { changeHTMLAttribute } from "../utils";
 import { useViewport } from "../hooks/useViewPort";
 
-// code splitting and lazy loading
-// https://blog.logrocket.com/lazy-loading-components-in-react-16-6-6cea535c0b52
 const Topbar = React.lazy(() => import("./Topbar"));
 const LeftSidebar = React.lazy(() => import("./LeftSidebar"));
 const Footer = React.lazy(() => import("./Footer"));
@@ -31,9 +29,7 @@ interface VerticalLayoutProps {
 const DetachedLayout = ({ children }: VerticalLayoutProps) => {
   const dispatch = useDispatch<AppDispatch>();
   const { width } = useViewport();
-
   const [isMenuOpened, setIsMenuOpened] = useState<boolean>(false);
-
   const {
     layoutColor,
     layoutWidth,

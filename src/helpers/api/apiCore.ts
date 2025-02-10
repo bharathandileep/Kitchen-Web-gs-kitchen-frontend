@@ -45,10 +45,7 @@ axios.interceptors.response.use(
 
 const AUTH_SESSION_KEY = "ubold_user";
 
-/**
- * Sets the default authorization
- * @param {*} token
- */
+
 const setAuthorization = (token: string | null) => {
   if (token) axios.defaults.headers.common["Authorization"] = "JWT " + token;
   else delete axios.defaults.headers.common["Authorization"];

@@ -7,6 +7,7 @@ import PageTitle from "../../../components/PageTitle";
 
 // dummy data
 import { products as data, ProductItemTypes } from "./data";
+import axios from "axios";
 
 // main component
 const Products = () => {
@@ -26,30 +27,36 @@ const Products = () => {
     }
   };
 
+  const check = async () => {
+    const res = await axios.get("http://localhost:5000/api/v1/health");
+    console.log(res);
+  };
+
   return (
     <React.Fragment>
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb m-2">
           <li className="breadcrumb-item">
-            <Link to="/apps/ecommerce/products">
-              Ecommerce
-            </Link>
+            <Link to="/apps/ecommerce/products">Ecommerce</Link>
           </li>
-          <li
-            className="breadcrumb-item active"
-            aria-current="page">
+          <li className="breadcrumb-item active" aria-current="page">
             Products
           </li>
         </ol>
       </nav>
       <div
         className="mb-3"
-        style={{ backgroundColor: "#5bd2bc", padding: "10px" }}>
+        style={{ backgroundColor: "#5bd2bc", padding: "10px" }}
+      >
         <div className="d-flex align-items-center justify-content-between">
           <h3 className="page-title m-0" style={{ color: "#fff" }}>
             Products
           </h3>
-          <Link to="#" className="btn btn-danger waves-effect waves-light">
+          <Link
+            to="#"
+            className="btn btn-danger waves-effect waves-light"
+            onClick={check}
+          >
             <i className="mdi mdi-plus-circle me-1"></i> Add New
           </Link>
         </div>
@@ -84,7 +91,8 @@ const Products = () => {
                     <div>
                       <select
                         className="form-select my-1 my-lg-0"
-                        id="status-select">
+                        id="status-select"
+                      >
                         <option defaultValue="all">All</option>
                         <option value="popular">Popular</option>
                         <option value="pricelow">Price Low</option>
@@ -109,12 +117,14 @@ const Products = () => {
                   <div className="product-action">
                     <Link
                       to="#"
-                      className="btn btn-success btn-xs waves-effect waves-light me-1">
+                      className="btn btn-success btn-xs waves-effect waves-light me-1"
+                    >
                       <i className="mdi mdi-pencil"></i>
                     </Link>
                     <Link
                       to="#"
-                      className="btn btn-danger btn-xs waves-effect waves-light">
+                      className="btn btn-danger btn-xs waves-effect waves-light"
+                    >
                       <i className="mdi mdi-close"></i>
                     </Link>
                   </div>
@@ -129,7 +139,8 @@ const Products = () => {
                         <h5 className="font-16 mt-0 sp-line-1">
                           <Link
                             to="/apps/ecommerce/product-details"
-                            className="text-dark">
+                            className="text-dark"
+                          >
                             {product.name}
                           </Link>
                         </h5>
