@@ -3,7 +3,7 @@ import { Row, Col, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 // components
-import PageTitle from "../../../components/PageTitle";
+// import PageTitle from "../../../components/PageTitle";
 
 import product1 from "../../../assets/images/products/product-1.png";
 import product2 from "../../../assets/images/products/product-2.png";

@@ -23,12 +23,7 @@ const VerticalForm = <
    * form methods
    */
   const methods = useForm<TFormValues>({ defaultValues, resolver });
-  const {
-    handleSubmit,
-    register,
-    control,
-    formState: { errors },
-  } = methods;
+  const { handleSubmit } = methods;
 
   // Return JSX
   return (
@@ -36,12 +31,8 @@ const VerticalForm = <
       {React.Children.map(children, child =>
         React.isValidElement(child) &&
           child.props 
-          // &&child.props.name
-         ? React.cloneElement(child, {
+          ? React.cloneElement(child, {
              ...child.props,
-              // register,
-              // errors, 
-              // control,
             })
           : child
       )}

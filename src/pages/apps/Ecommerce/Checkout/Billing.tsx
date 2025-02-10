@@ -10,7 +10,7 @@ import MaskedInput from "react-text-mask";
 import { FormInput } from "../../../../components/";
 
 // dafault data
-import { countries } from "./data";
+// import { countries } from "./data";
 
 // Billing
 const Billing = () => {
