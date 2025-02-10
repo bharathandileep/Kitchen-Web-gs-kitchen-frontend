@@ -22,7 +22,7 @@ const Opportunities = () => {
             active: true,
           },
         ]}
-        title={"Opportunities"}
+        title={"OpportunitiesS"}
       />
       <Row>
         <Col xl={{ span: 8, order: 1 }} xs={{ span: 12, order: 2 }}>

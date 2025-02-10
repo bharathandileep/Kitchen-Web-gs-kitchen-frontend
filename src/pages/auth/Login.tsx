@@ -167,7 +167,7 @@ const Login = () => {
 
           <div className="text-center d-grid">
             <Button variant="primary" type="submit" disabled={loading}>
-              {t("Log In")}
+              {t("Log Inn")}
             </Button>
           </div>
         </VerticalForm>

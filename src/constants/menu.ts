@@ -13,6 +13,7 @@ export interface MenuItemTypes {
   children?: MenuItemTypes[];
 }
 
+
 const MENU_ITEMS: MenuItemTypes[] = [
   { key: "navigation", label: "Navigation", isTitle: true },
   {

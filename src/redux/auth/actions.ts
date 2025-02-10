@@ -48,7 +48,7 @@ export const loginUser = (
   type: AuthActionTypes.LOGIN_USER,
   payload: { username, password },
 });
-
+  
 export const logoutUser = (): AuthActionType => ({
   type: AuthActionTypes.LOGOUT_USER,
   payload: {},

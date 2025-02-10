@@ -50,7 +50,7 @@ const AllRoutes = (props: IRoutesProps) => {
 
   let Layout = getLayout();
   const api = new APICore();
-
+   console.log(publicProtectedFlattenRoutes)
   return (
     <React.Fragment>
       <Routes>
@@ -73,7 +73,7 @@ const AllRoutes = (props: IRoutesProps) => {
             <Route
               path={route.path}
               element={
-                api.isUserAuthenticated() === false ? (
+                api.isUserAuthenticated() == false ? (
                   <Navigate
                     to={{
                       pathname: "/auth/login",

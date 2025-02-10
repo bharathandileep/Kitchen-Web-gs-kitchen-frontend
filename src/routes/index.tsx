@@ -608,7 +608,7 @@ const appRoutes = [
   foodAppRoutes,
   foodCartAppRoute,
   foodCheckoutAppRoute,
-  // foodOrderAppRoute,
+  foodAppRoutes,
 ];
 
 // pages
@@ -1178,7 +1178,6 @@ const authProtectedRoutes = [
   uiRoutes,
 ];
 const publicRoutes = [...authRoutes, ...otherPublicRoutes];
-
 const authProtectedFlattenRoutes = flattenRoutes([...authProtectedRoutes]);
 const publicProtectedFlattenRoutes = flattenRoutes([...publicRoutes]);
 export {
