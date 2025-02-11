@@ -7,6 +7,7 @@ import PrivateRoute from "./PrivateRoute";
 // lazy load required views
 const EcommerceProducts = React.lazy(() => import("../pages/apps/Ecommerce/Products"));
 const ProductDetails = React.lazy(() => import("../pages/apps/Ecommerce/ProductDetails"));
+const ProductAccordian = React.lazy(() => import("../pages/apps/Ecommerce/ProductAccordian"));
 const ProductEdit = React.lazy(() => import("../pages/apps/Ecommerce/ProductEdit"));
 const Orders = React.lazy(() => import("../pages/apps/Ecommerce/Orders"));
 const OrderDetails = React.lazy(() => import("../pages/apps/Ecommerce/OrderDetails"));
