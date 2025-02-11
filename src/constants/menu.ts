@@ -34,6 +34,12 @@ const MENU_ITEMS: MenuItemTypes[] = [
         parentKey: "apps-ecommerce",
       },
       {
+        key: "ecommerce-accordian",
+        label: "Product Accordian",
+        url: "/apps/ecommerce/product-accordian",
+        parentKey: "apps-ecommerce",
+      },
+      {
         key: "ecommerce-edit-product",
         label: "Add Product",
         url: "/apps/ecommerce/edit-product",

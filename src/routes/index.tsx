@@ -74,6 +74,12 @@ const ecommerceAppRoutes = {
       route: PrivateRoute,
     },
     {
+      path: "/apps/ecommerce/product-accordian",
+      name: "Product Accordian",
+      element: <ProductAccordian />,
+      route: PrivateRoute,
+    },
+    {
       path: "/apps/ecommerce/edit-product",
       name: "Product Edit",
       element: <ProductEdit />,
