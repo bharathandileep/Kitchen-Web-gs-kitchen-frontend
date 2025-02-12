@@ -60,7 +60,6 @@ const ProductDetails: React.FC = () => {
 
   return (
     <div className="container-fluid px-4 py-3">
-      {/* Breadcrumb */}
       <nav aria-label="breadcrumb" className="mb-3">
         <ol className="breadcrumb m-0">
           <li className="breadcrumb-item">
@@ -71,8 +70,6 @@ const ProductDetails: React.FC = () => {
           </li>
         </ol>
       </nav>
-
-      {/* Profile Section */}
       <div
         className="mb-4 position-relative overflow-hidden"
         style={{
@@ -113,11 +110,8 @@ const ProductDetails: React.FC = () => {
               </div>
             </div>
           </Col>
-
-          {/* Column 2: Profile Details */}
           <Col xs={12} md={6} className="text-center text-md-start mt-4 mt-md-0">
             <div className="d-flex flex-column h-100">
-              {/* Business Name */}
               <h2 
                 className="text-white mb-3"
                 style={{ 
@@ -127,8 +121,6 @@ const ProductDetails: React.FC = () => {
                 }}>
                 Dine Eas
               </h2>
-
-              {/* Contact Information */}
               <div className="mb-3" style={{display: 'flex', flexDirection: 'column'}}>
                 {[
                   { icon: "account", text: "Dine Eas" },

@@ -106,7 +106,7 @@ const ProductEdit = () => {
                 <h5 className="text-uppercase mt-0 mb-3">General</h5>
                 <FormInput
                   name="name"
-                  label="Product Name"
+                  label="Product Names"
                   placeholder="e.g : Apple iMac"
                   containerClass={"mb-3"}
                   register={register}

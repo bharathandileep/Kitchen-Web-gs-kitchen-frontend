@@ -180,7 +180,7 @@ const sizePerPageList = [
 
 // main component
 const Orders = () => {
-  const [orderList, setOrderList] = useState<OrdersItemTypes[]>(orders);
+    const [orderList, setOrderList] = useState<OrdersItemTypes[]>(orders);
   const [searchTerm, setSearchTerm] = useState('');
 
   // change order status group

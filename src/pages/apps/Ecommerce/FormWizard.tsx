@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { Card, Row, Col, Button } from 'react-bootstrap';
-import { CheckCircle } from 'react-feather';
-import './FormWizard.scss'; // Create this file for custom styles
+import React, { useState } from "react";
+import { Card, Row, Col, Button } from "react-bootstrap";
+import { CheckCircle } from "react-feather";
+import "./FormWizard.scss";
 
 interface FormData {
   step1: {
@@ -21,9 +21,9 @@ interface FormData {
 const FormWizard = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<FormData>({
-    step1: { firstName: '', lastName: '' },
-    step2: { email: '', phone: '' },
-    step3: { address: '', city: '' },
+    step1: { firstName: "", lastName: "" },
+    step2: { email: "", phone: "" },
+    step3: { address: "", city: "" },
   });
 
   const handleNext = () => {
@@ -35,7 +35,7 @@ const FormWizard = () => {
   };
 
   const handleSubmit = () => {
-    console.log('Form submitted:', formData);
+    console.log("Form submitted:", formData);
     // Handle form submission
   };
 
@@ -167,9 +167,9 @@ const FormWizard = () => {
   };
 
   const steps = [
-    { number: 1, title: 'Personal Info' },
-    { number: 2, title: 'Contact' },
-    { number: 3, title: 'Address' }
+    { number: 1, title: "Personal Info" },
+    { number: 2, title: "Contact" },
+    { number: 3, title: "Address" },
   ];
 
   const renderStepper = () => (
@@ -179,10 +179,10 @@ const FormWizard = () => {
           key={step.number}
           className={`stepper-item ${
             currentStep > step.number
-              ? 'completed'
+              ? "completed"
               : currentStep === step.number
-              ? 'active'
-              : ''
+              ? "active"
+              : ""
           }`}
         >
           <div className="step-counter">
@@ -203,7 +203,11 @@ const FormWizard = () => {
           {renderStep()}
           <div className="text-center mt-4">
             {currentStep > 1 && (
-              <Button variant="secondary" className="me-2" onClick={handlePrevious}>
+              <Button
+                variant="secondary"
+                className="me-2"
+                onClick={handlePrevious}
+              >
                 Previous
               </Button>
             )}

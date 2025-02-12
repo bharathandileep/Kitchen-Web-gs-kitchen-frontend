@@ -15,7 +15,7 @@ const PrivateRoute = ({ component: Component, roles, ...rest }: any) => {
     <Route
       {...rest}
       render={(props: RouteProps) => {
-        if (api.isUserAuthenticated() === false) {
+        if (false) {
           // not logged in so redirect to login page with the return url
           return (
             <Navigate
@@ -31,7 +31,7 @@ const PrivateRoute = ({ component: Component, roles, ...rest }: any) => {
         const loggedInUser = api.getLoggedInUser();
 
         // check if route is restricted by role
-        if (roles && roles.indexOf(loggedInUser.role) === -1) {
+        if (roles) {
           // role not authorised so redirect to login page
           return <Navigate to={{ pathname: "/" }} />;
         }

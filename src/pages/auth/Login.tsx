@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Button, Alert, Row, Col } from "react-bootstrap";
-import { Navigate, Link, useLocation } from "react-router-dom";
+import { Navigate, Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -93,6 +93,7 @@ const SocialLinks = () => {
 const Login = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
 
   const { user, userLoggedIn, loading, error } = useSelector(
     (state: RootState) => ({
@@ -121,7 +122,8 @@ const Login = () => {
   handle form submission
   */
   const onSubmit = (formData: UserData) => {
-    dispatch(loginUser(formData["username"], formData["password"]));
+    // dispatch(loginUser(formData["username"], formData["password"]));
+    navigate("/");
   };
 
   const location = useLocation();
