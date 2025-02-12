@@ -317,7 +317,7 @@ const ProductDetails: React.FC = () => {
               md={6}
               className="d-flex align-items-center justify-content-center">
               <img
-                src={productImg1}
+                // src={productImg1}
                 alt={product.name}
                 className="img-fluid rounded"
                 style={{ maxHeight: "400px", objectFit: "contain" }}

@@ -39,6 +39,17 @@ interface Product {
   features: string[];
 }
 
+interface MenuItem {
+  name: string;
+  price: number;
+  description: string;
+  image: string;
+}
+
+interface CartItem extends MenuItem {
+  quantity: number;
+}
+
 const ProductDetails: React.FC = () => {
   const [product] = useState<Product>({
     name: "Smart Wireless Headphones",
@@ -58,11 +69,62 @@ const ProductDetails: React.FC = () => {
     ],
   });
 
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  
+  // Calculate total price
+  const totalPrice = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+  // Handle add to cart
+  const handleAddToCart = (item: MenuItem) => {
+    const existingItem = cartItems.find(cartItem => cartItem.name === item.name);
+    
+    if (existingItem) {
+      setCartItems(cartItems.map(cartItem =>
+        cartItem.name === item.name
+          ? { ...cartItem, quantity: cartItem.quantity + 1 }
+          : cartItem
+      ));
+    } else {
+      setCartItems([...cartItems, { ...item, quantity: 1 }]);
+    }
+  };
+
+  // Checkout bar component
+  const CheckoutBar = () => {
+    if (cartItems.length === 0) return null;
+
+    return (
+      <div
+        style={{
+          position: 'fixed',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          backgroundColor: 'white',
+          padding: '1rem',
+          boxShadow: '0 -2px 10px rgba(0,0,0,0.1)',
+          zIndex: 1000,
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center'
+        }}
+      >
+        <div>
+          <span className="fw-bold">{cartItems.reduce((sum, item) => sum + item.quantity, 0)} items</span>
+          <span className="ms-3">Total: ₹{totalPrice}</span>
+        </div>
+        <Button variant="primary">
+          Proceed to Checkout
+        </Button>
+      </div>
+    );
+  };
+
   const discountedPrice =
     product.price - (product.price * product.discount) / 100;
 
   return (
-    <div className="container-fluid px-4 py-3">
+    <div className="container-fluid px-4 py-3" style={{ marginBottom: cartItems.length > 0 ? '80px' : '0' }}>
       {/* Breadcrumb */}
       <nav aria-label="breadcrumb" className="mb-3">
         <ol className="breadcrumb m-0">
@@ -406,6 +468,7 @@ const ProductDetails: React.FC = () => {
                               variant="outline-primary" 
                               size="sm"
                               className="px-3"
+                              onClick={() => handleAddToCart(item)}
                             >
                               Add
                             </Button>
@@ -505,6 +568,7 @@ const ProductDetails: React.FC = () => {
                               variant="outline-primary" 
                               size="sm"
                               className="px-3"
+                              onClick={() => handleAddToCart(item)}
                             >
                               Add
                             </Button>
@@ -598,6 +662,7 @@ const ProductDetails: React.FC = () => {
                               variant="outline-primary" 
                               size="sm"
                               className="px-3"
+                              onClick={() => handleAddToCart(item)}
                             >
                               Add
                             </Button>
@@ -612,6 +677,9 @@ const ProductDetails: React.FC = () => {
           </Tabs>
         </Card.Body>
       </Card>
+
+      {/* Add the checkout bar at the end */}
+      <CheckoutBar />
     </div>
   );
 };
